@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавить транзакцию</title>
+</head>
+<body>
+<h1>Добавить транзакцию для <span th:text="${category.name}"></span></h1>
+
+<form th:action="@{/transactions/add}" th:object="${transaction}" method="post">
+    <input type="text" th:field="*{name}" placeholder="Название транзакции" required />
+    <input type="text" th:field="*{amount}" placeholder="Сумма" required />
+    <input type="date" th:field="*{date}" required />
+    <input type="hidden" th:name="categoryId" th:value="${category.id}" />
+    <button type="submit">Сохранить транзакцию</button>
+</form>
+
+<a href="@{/categories}">Назад к категориям</a>
+</body>
+</html>

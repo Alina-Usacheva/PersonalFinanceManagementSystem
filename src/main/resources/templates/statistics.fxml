@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Region?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.personal_finances.controller.StatisticsController"
+            style="-fx-background-color: #f9f9f9; -fx-padding: 10 20;">
+    <center>
+        <BarChart fx:id="barChart">
+            <xAxis>
+                <CategoryAxis side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT"/>
+            </yAxis>
+        </BarChart>
+    </center>
+    <bottom>
+        <VBox spacing="15">
+            <HBox spacing="10" alignment="CENTER">
+                <Label text="Выберите период:"/>
+                <DatePicker fx:id="startDatePicker"/>
+                <Label text="—" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <DatePicker fx:id="endDatePicker"/>
+            </HBox>
+            <HBox spacing="10" alignment="CENTER">
+                <Label text="Выберите категорию:"/>
+                <ComboBox fx:id="categoryComboBox" prefWidth="200"/>
+            </HBox>
+            <HBox alignment="CENTER">
+                <Region prefWidth="15"/>
+                <Button text="Сформировать отчет" onAction="#generateReport" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 10 20;"/>
+                <Region prefWidth="15"/>
+            </HBox>
+        </VBox>
+    </bottom>
+</BorderPane>

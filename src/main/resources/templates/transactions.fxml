@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.personal_finances.controller.TransactionsController"
+      style="-fx-background-color: #f9f9f9; -fx-padding: 10 20;">
+    <VBox spacing="15.0" layoutX="14.0" layoutY="14.0" prefWidth="400.0" prefHeight="300.0" alignment="CENTER">
+        <Label text="Введите данные транзакции" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+        <TextField fx:id="transactionNameField" promptText="Название транзакции"/>
+        <TextField fx:id="transactionAmountField" promptText="Сумма"/>
+        <DatePicker fx:id="transactionDatePicker" promptText="Дата"/>
+
+        <Button fx:id="saveTransactionButton" text="Записать" onAction="#saveTransaction" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 10 20;"/>
+    </VBox>
+</VBox>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.personal_finances.controller.CategoriesController"
+      style="-fx-background-color: #f9f9f9; -fx-padding: 10 20;">
+    <VBox spacing="15.0" layoutX="14.0" layoutY="14.0" alignment="CENTER">
+        <Label text="Категории доходов" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+        <TableView fx:id="incomeCategoriesTable" VBox.vgrow="ALWAYS"
+                   style="-fx-background-color: white; -fx-border-color: #ccc; -fx-border-width: 1;">
+            <columns>
+                <TableColumn fx:id="incomeNameColumn" text="Название"/>
+            </columns>
+        </TableView>
+
+        <Label text="Категории расходов" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+        <TableView fx:id="expenseCategoriesTable" VBox.vgrow="ALWAYS"
+                   style="-fx-background-color: white; -fx-border-color: #ccc; -fx-border-width: 1;">
+            <columns>
+                <TableColumn fx:id="expenseNameColumn" text="Название"/>
+            </columns>
+        </TableView>
+
+        <HBox spacing="10.0" alignment="CENTER">
+            <TextField fx:id="categoryNameField" promptText="Введите название категории" VBox.vgrow="NEVER" prefWidth="500"/>
+            <ComboBox fx:id="categoryTypeComboBox" VBox.vgrow="NEVER" prefWidth="300">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="INCOME"/>
+                        <String fx:value="EXPENSE"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+        </HBox>
+
+        <HBox spacing="10.0" alignment="CENTER">
+            <Button fx:id="saveButton" text="Добавить" onAction="#addCategory"
+                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 10 20;"/>
+            <Button fx:id="updateButton" text="Обновить" onAction="#updateCategory"
+                    style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-padding: 10 20;"/>
+            <Button fx:id="deleteButton" text="Удалить" onAction="#deleteCategory"
+                    style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-padding: 10 20;"/>
+            <Button fx:id="statisticButton" text="Статистика" onAction="#statisticCategory"
+                    style="-fx-background-color: #FFC107; -fx-text-fill: white; -fx-padding: 10 20;"/>
+        </HBox>
+    </VBox>
+</VBox>

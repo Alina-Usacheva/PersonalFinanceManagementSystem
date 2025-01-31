@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Статистика</title>
+  <style>
+    .chart-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .chart {
+      display: flex;
+      align-items: flex-end;
+      height: 300px; /* Высота графика */
+      width: 100%;
+      border-left: 2px solid #000; /* Левый край графика */
+      border-bottom: 2px solid #000; /* Нижний край графика */
+      position: relative;
+    }
+    .bar {
+      flex-grow: 1; /* Позволяет столбцам занимать равное пространство */
+      background-color: #4CAF50; /* Цвет столбца */
+      margin: 0 2px; /* Отступы между столбцами */
+      position: relative;
+    }
+    .bar-label {
+      position: absolute;
+      bottom: 100%; /* Позиционирование метки над столбцом */
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: #000;
+    }
+    .x-axis {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 10px; /* Отступ между графиком и осью X */
+    }
+    .x-axis-label {
+      font-size: 12px;
+      text-align: center;
+      width: 30px; /* Ширина метки оси X */
+      margin-top: 5px; /* Отступ между меткой и осью X */
+    }
+  </style>
+</head>
+<body>
+<h1>Статистика</h1>
+<div th:if="${error}" class="error" th:text="${error}"></div>
+<form action="/generateReport" method="post">
+  <label>Выберите период:</label>
+  <input type="date" name="startDate">
+  <span>—</span>
+  <input type="date" name="endDate">
+  <br>
+  <label>Выберите категорию:</label>
+  <select name="categoryId" required>
+    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+  </select>
+  <br>
+  <button type="submit">Сформировать отчет</button>
+</form>
+
+<div class="chart-container">
+  <div class="chart">
+    <div th:each="entry : ${monthlyTotals}" class="bar"
+         th:style="'height: ' + (${entry.value} / ${maxValue} * 100) + '%;'">
+      <div class="bar-label" th:text="${entry.value}"></div>
+    </div>
+  </div>
+  <div class="x-axis">
+    <div th:each="entry : ${monthlyTotals}" class="x-axis-label" th:text="${entry.key}"></div>
+  </div>
+</div>
+</body>
+</html>

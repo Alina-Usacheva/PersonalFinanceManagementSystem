@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Категории</title>
+</head>
+<body>
+<h1>Категории</h1>
+
+<h2>Категории доходов</h2>
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Действия</th>
+    </tr>
+    <tr th:each="category : ${incomeCategories}">
+        <td th:text="${category.name}"></td>
+        <td>
+            <form th:action="@{/categories/delete/{id}(id=${category.id})}" method="post">
+                <button type="submit">Удалить</button>
+            </form>
+            <form th:action="@{/transactions/new}" method="get">
+                <input type="hidden" name="categoryId" th:value="${category.id}" />
+                <button type="submit">Добавить транзакцию</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<h2>Категории расходов</h2>
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Действия</th>
+    </tr>
+    <tr th:each="category : ${expenseCategories}">
+        <td th:text="${category.name}"></td>
+        <td>
+            <form th:action="@{/categories/delete/{id}(id=${category.id})}" method="post">
+                <button type="submit">Удалить</button>
+            </form>
+            <form th:action="@{/transactions/new}" method="get">
+                <input type="hidden" name="categoryId" th:value="${category.id}" />
+                <button type="submit">Добавить транзакцию</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<h3>Добавить новую категорию</h3>
+<form th:action="@{/categories/add}" th:object="${newCategory}" method="post">
+    <input type="text" th:field="*{name}" placeholder="Название категории" required />
+    <select th:field="*{type}">
+        <option value="INCOME">Доходы</option>
+        <option value="EXPENSE">Расходы</option>
+    </select>
+    <button type="submit">Добавить</button>
+</form>
+<form th:action="@{/statistics}" method="get">
+    <button type="submit">Статистика</button>
+</form>
+</body>
+</html>
